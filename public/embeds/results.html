@@ -1,0 +1,163 @@
+<!-- Точка отдыха: результаты поиска номеров -->
+<div id="bk-results-page">
+  <style>
+    #bk-results-page{max-width:1200px;margin:0 auto;padding:20px 10px;font-family:'Montserrat',Arial,sans-serif;box-sizing:border-box}
+    #bk-results-page *{box-sizing:border-box}
+    .bk-search{background:#faf9f7;border-radius:20px;padding:20px;display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-bottom:30px}
+    .bk-field{display:flex;flex-direction:column;gap:6px;min-width:130px}
+    .bk-field label{font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.03em}
+    .bk-field input[type=date],.bk-field input[type=number],.bk-field select{border:1px solid #ddd;border-radius:10px;padding:10px 12px;font-size:15px;font-family:inherit;width:100%}
+    .bk-opts{display:flex;flex-wrap:wrap;gap:10px;min-width:220px}
+    .bk-opts label{display:flex;align-items:center;gap:6px;font-size:13px;color:#333;font-weight:normal}
+    .bk-search-btn{background:#F52757;color:#fff;border:none;border-radius:15px;padding:13px 28px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
+    .bk-summary{margin:0 0 20px;font-size:15px;color:#555}
+    .bk-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}
+    .bk-card{border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.08);display:flex;flex-direction:column}
+    .bk-card img{width:100%;height:170px;object-fit:cover;display:block;background:#eee}
+    .bk-card-body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+    .bk-card-title{font-size:17px;font-weight:600;margin:0}
+    .bk-card-descr{color:#777;font-size:13px;line-height:1.4}
+    .bk-card-tags{display:flex;flex-wrap:wrap;gap:6px}
+    .bk-tag{background:#f1f1f1;border-radius:20px;padding:3px 10px;font-size:11px;color:#666}
+    .bk-card-price{font-size:20px;font-weight:700;color:#F52757;margin-top:auto}
+    .bk-card-actions{display:flex;gap:8px}
+    .bk-btn{flex:1;text-align:center;text-decoration:none;border-radius:15px;padding:11px;font-size:13px;font-weight:600;font-family:inherit;border:none;cursor:pointer}
+    .bk-btn-call{background:#111;color:#fff}
+    .bk-btn-wa{background:#25D366;color:#fff}
+    .bk-empty{padding:40px;text-align:center;color:#888;font-size:15px}
+    @media(max-width:640px){.bk-search{flex-direction:column;align-items:stretch}.bk-search-btn{width:100%}}
+  </style>
+
+  <form class="bk-search" id="bk-search-form">
+    <div class="bk-field">
+      <label>Заезд</label>
+      <input type="date" name="checkin" id="bk-checkin">
+    </div>
+    <div class="bk-field">
+      <label>Выезд</label>
+      <input type="date" name="checkout" id="bk-checkout">
+    </div>
+    <div class="bk-field">
+      <label>Гости</label>
+      <input type="number" name="guests" id="bk-guests" min="1" max="10" value="2">
+    </div>
+    <div class="bk-field">
+      <label>Дети</label>
+      <input type="number" name="kids" id="bk-kids" min="0" max="6" value="0">
+    </div>
+    <div class="bk-field">
+      <label>Категория</label>
+      <select id="bk-category">
+        <option value="">Все категории</option>
+        <option value="single">Одноместные</option>
+        <option value="double">Двухместные</option>
+        <option value="triple">Трёхместные</option>
+        <option value="bungalow">Бунгало</option>
+        <option value="apartment">Апартаменты</option>
+      </select>
+    </div>
+    <div class="bk-opts">
+      <label><input type="checkbox" value="separate_beds"> Раздельные кровати</label>
+      <label><input type="checkbox" value="kitchen"> Кухня</label>
+      <label><input type="checkbox" value="balcony"> Балкон</label>
+    </div>
+    <button type="submit" class="bk-search-btn">Показать номера</button>
+  </form>
+
+  <div class="bk-summary" id="bk-summary"></div>
+  <div class="bk-cards" id="bk-cards">Загрузка…</div>
+</div>
+
+<script>
+(function(){
+  var API = 'https://bakinka-rooms.vercel.app';
+  var PHONE = '+79889564222';
+  var OPTION_LABELS = {separate_beds:'Раздельные кровати', kitchen:'Кухня', balcony:'Балкон'};
+
+  function paramsFromUrl(){
+    return new URLSearchParams(window.location.search);
+  }
+
+  function fillFormFromParams(p){
+    if (p.get('checkin')) document.getElementById('bk-checkin').value = p.get('checkin');
+    if (p.get('checkout')) document.getElementById('bk-checkout').value = p.get('checkout');
+    if (p.get('guests')) document.getElementById('bk-guests').value = p.get('guests');
+    if (p.get('kids')) document.getElementById('bk-kids').value = p.get('kids');
+    if (p.get('category')) document.getElementById('bk-category').value = p.get('category');
+    if (p.get('options')) {
+      var opts = p.get('options').split(',');
+      document.querySelectorAll('#bk-search-form input[type=checkbox]').forEach(function(c){
+        c.checked = opts.indexOf(c.value) !== -1;
+      });
+    }
+  }
+
+  function currentParams(){
+    var p = new URLSearchParams();
+    var checkin = document.getElementById('bk-checkin').value;
+    var checkout = document.getElementById('bk-checkout').value;
+    var guests = document.getElementById('bk-guests').value;
+    var kids = document.getElementById('bk-kids').value;
+    var category = document.getElementById('bk-category').value;
+    var opts = Array.prototype.slice.call(document.querySelectorAll('#bk-search-form input[type=checkbox]:checked')).map(function(c){return c.value});
+    if (checkin) p.set('checkin', checkin);
+    if (checkout) p.set('checkout', checkout);
+    if (guests) p.set('guests', guests);
+    if (kids) p.set('kids', kids);
+    if (category) p.set('category', category);
+    if (opts.length) p.set('options', opts.join(','));
+    return p;
+  }
+
+  document.getElementById('bk-search-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var p = currentParams();
+    window.history.pushState({}, '', '?' + p.toString());
+    runSearch(p);
+  });
+
+  function runSearch(p){
+    var cardsEl = document.getElementById('bk-cards');
+    var summaryEl = document.getElementById('bk-summary');
+    cardsEl.innerHTML = 'Загрузка…';
+    fetch(API + '/api/rooms?' + p.toString()).then(function(r){return r.json()}).then(function(data){
+      var rooms = data.rooms || [];
+      var parts = [];
+      if (data.checkin && data.checkout) parts.push(data.checkin + ' — ' + data.checkout);
+      parts.push(rooms.length + ' номер(ов) найдено');
+      summaryEl.textContent = parts.join(', ');
+
+      cardsEl.innerHTML = '';
+      if (!rooms.length) {
+        cardsEl.innerHTML = '<div class="bk-empty">На выбранные даты и параметры свободных номеров не найдено. Попробуйте изменить даты или позвоните нам: ' + PHONE + '</div>';
+        return;
+      }
+      rooms.forEach(function(room){
+        var card = document.createElement('div');
+        card.className = 'bk-card';
+        var tags = (room.options||[]).map(function(o){return '<span class="bk-tag">'+(OPTION_LABELS[o]||o)+'</span>'}).join('');
+        var waText = encodeURIComponent('Здравствуйте! Интересует номер «' + room.title + '»' + (data.checkin ? (' на ' + data.checkin + ' — ' + data.checkout) : '') + '.');
+        card.innerHTML =
+          '<img src="' + room.image + '" alt="' + room.title + '">' +
+          '<div class="bk-card-body">' +
+            '<div class="bk-card-title">' + room.title + '</div>' +
+            '<div class="bk-card-descr">' + (room.descr||'') + '</div>' +
+            '<div class="bk-card-tags">' + tags + '</div>' +
+            '<div class="bk-card-price">' + room.price.toLocaleString('ru-RU') + ' р. / сутки</div>' +
+            '<div class="bk-card-actions">' +
+              '<a class="bk-btn bk-btn-call" href="tel:' + PHONE + '">Позвонить</a>' +
+              '<a class="bk-btn bk-btn-wa" target="_blank" href="https://wa.me/' + PHONE.replace("+","") + '?text=' + waText + '">WhatsApp</a>' +
+            '</div>' +
+          '</div>';
+        cardsEl.appendChild(card);
+      });
+    }).catch(function(){
+      cardsEl.innerHTML = '<div class="bk-empty">Не удалось загрузить номера. Попробуйте позже.</div>';
+    });
+  }
+
+  var p = paramsFromUrl();
+  fillFormFromParams(p);
+  runSearch(p);
+})();
+</script>

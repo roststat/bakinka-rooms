@@ -1,0 +1,146 @@
+<!-- Точка отдыха: админка занятости номеров (вставить на страницу, защищённую паролем Тильды) -->
+<div id="bk-admin-page">
+  <style>
+    #bk-admin-page{max-width:1100px;margin:0 auto;padding:20px 10px;font-family:'Montserrat',Arial,sans-serif;box-sizing:border-box}
+    #bk-admin-page *{box-sizing:border-box}
+    .bk-admin-bar{display:flex;gap:12px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+    .bk-admin-bar select,.bk-admin-bar button{border:1px solid #ddd;border-radius:10px;padding:9px 14px;font-size:14px;font-family:inherit}
+    .bk-admin-bar button{background:#F52757;color:#fff;border:none;cursor:pointer;font-weight:600}
+    .bk-admin-status{font-size:13px;color:#888}
+    table.bk-admin-table{border-collapse:collapse;width:100%;font-size:12px}
+    table.bk-admin-table th,table.bk-admin-table td{border:1px solid #eee;padding:6px;text-align:center;white-space:nowrap}
+    table.bk-admin-table th.bk-room-col,table.bk-admin-table td.bk-room-col{text-align:left;position:sticky;left:0;background:#fff;min-width:190px}
+    table.bk-admin-table thead th{background:#faf9f7;font-weight:600}
+    .bk-cell{width:34px;height:28px;cursor:pointer;border-radius:6px}
+    .bk-cell.free{background:#e8f7ec;color:#1a7a34}
+    .bk-cell.blocked{background:#fde8ea;color:#c21f36}
+    .bk-cell:hover{outline:2px solid #F52757}
+    .bk-cat-row td{background:#faf9f7;font-weight:700;text-align:left;padding:8px 6px}
+    .bk-scroll{overflow-x:auto;border:1px solid #eee;border-radius:10px}
+  </style>
+
+  <div class="bk-admin-bar">
+    <button id="bk-admin-login">Войти</button>
+    <select id="bk-admin-days">
+      <option value="14">14 дней</option>
+      <option value="30">30 дней</option>
+      <option value="60">60 дней</option>
+    </select>
+    <span class="bk-admin-status" id="bk-admin-status">Введите пароль администратора, чтобы увидеть таблицу занятости.</span>
+  </div>
+
+  <div class="bk-scroll">
+    <table class="bk-admin-table" id="bk-admin-table"></table>
+  </div>
+</div>
+
+<script>
+(function(){
+  var API = 'https://bakinka-rooms.vercel.app';
+  var LABELS = {single:'Одноместные',double:'Двухместные',triple:'Трёхместные',bungalow:'Бунгало',apartment:'Апартаменты'};
+  var secret = sessionStorage.getItem('bk_admin_secret') || '';
+
+  function fmtDate(d){
+    return d.toISOString().slice(0,10);
+  }
+  function fmtShort(dateStr){
+    var d = new Date(dateStr + 'T00:00:00Z');
+    return d.getUTCDate() + '.' + String(d.getUTCMonth()+1).padStart(2,'0');
+  }
+
+  function authFetch(path, options){
+    options = options || {};
+    options.headers = Object.assign({}, options.headers, {'X-Admin-Secret': secret});
+    return fetch(API + path, options);
+  }
+
+  function login(){
+    var entered = prompt('Пароль администратора:');
+    if (!entered) return;
+    secret = entered;
+    sessionStorage.setItem('bk_admin_secret', secret);
+    load();
+  }
+  document.getElementById('bk-admin-login').addEventListener('click', login);
+  document.getElementById('bk-admin-days').addEventListener('change', load);
+
+  function load(){
+    if (!secret) { document.getElementById('bk-admin-status').textContent = 'Нажмите «Войти» и введите пароль.'; return; }
+    document.getElementById('bk-admin-status').textContent = 'Загрузка…';
+    authFetch('/api/admin/rooms').then(function(r){
+      if (r.status === 401) { throw new Error('unauthorized'); }
+      return r.json();
+    }).then(function(data){
+      renderTable(data.rooms, data.blocked);
+      document.getElementById('bk-admin-status').textContent = 'Кликните по ячейке, чтобы открыть/закрыть номер на эту дату.';
+    }).catch(function(err){
+      if (err.message === 'unauthorized') {
+        sessionStorage.removeItem('bk_admin_secret');
+        secret = '';
+        document.getElementById('bk-admin-status').textContent = 'Неверный пароль. Нажмите «Войти» ещё раз.';
+      } else {
+        document.getElementById('bk-admin-status').textContent = 'Ошибка загрузки данных.';
+      }
+    });
+  }
+
+  function renderTable(rooms, blocked){
+    var days = parseInt(document.getElementById('bk-admin-days').value, 10);
+    var dates = [];
+    var today = new Date();
+    today.setUTCHours(0,0,0,0);
+    for (var i=0;i<days;i++){
+      var d = new Date(today);
+      d.setUTCDate(d.getUTCDate()+i);
+      dates.push(fmtDate(d));
+    }
+
+    var byCategory = {};
+    rooms.forEach(function(r){ (byCategory[r.category] = byCategory[r.category]||[]).push(r); });
+
+    var table = document.getElementById('bk-admin-table');
+    var html = '<thead><tr><th class="bk-room-col">Номер</th>';
+    dates.forEach(function(d){ html += '<th>' + fmtShort(d) + '</th>'; });
+    html += '</tr></thead><tbody>';
+
+    Object.keys(byCategory).forEach(function(cat){
+      html += '<tr class="bk-cat-row"><td colspan="' + (dates.length+1) + '">' + (LABELS[cat]||cat) + '</td></tr>';
+      byCategory[cat].forEach(function(room){
+        html += '<tr><td class="bk-room-col">' + room.title + '</td>';
+        dates.forEach(function(date){
+          var isBlocked = (blocked[date]||[]).indexOf(room.id) !== -1;
+          html += '<td><div class="bk-cell ' + (isBlocked?'blocked':'free') + '" data-room="' + room.id + '" data-date="' + date + '" data-blocked="' + isBlocked + '">' + (isBlocked?'✕':'✓') + '</div></td>';
+        });
+        html += '</tr>';
+      });
+    });
+    html += '</tbody>';
+    table.innerHTML = html;
+
+    table.querySelectorAll('.bk-cell').forEach(function(cell){
+      cell.addEventListener('click', function(){
+        var roomId = cell.getAttribute('data-room');
+        var date = cell.getAttribute('data-date');
+        var nowBlocked = cell.getAttribute('data-blocked') === 'true';
+        var newBlocked = !nowBlocked;
+        cell.style.opacity = 0.4;
+        authFetch('/api/admin/toggle', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({roomId: roomId, date: date, blocked: newBlocked})
+        }).then(function(r){ return r.json(); }).then(function(){
+          cell.style.opacity = 1;
+          cell.setAttribute('data-blocked', newBlocked);
+          cell.className = 'bk-cell ' + (newBlocked?'blocked':'free');
+          cell.textContent = newBlocked ? '✕' : '✓';
+        }).catch(function(){
+          cell.style.opacity = 1;
+          alert('Не удалось сохранить изменение, попробуйте снова.');
+        });
+      });
+    });
+  }
+
+  if (secret) load();
+})();
+</script>

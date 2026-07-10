@@ -1,0 +1,104 @@
+<!-- Точка отдыха: карточки категорий номеров + виджет поиска -->
+<div id="bk-rooms-page">
+  <style>
+    #bk-rooms-page{max-width:1200px;margin:0 auto;padding:20px 10px;font-family:'Montserrat',Arial,sans-serif;box-sizing:border-box}
+    #bk-rooms-page *{box-sizing:border-box}
+    .bk-search{background:#faf9f7;border-radius:20px;padding:20px;display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-bottom:36px}
+    .bk-field{display:flex;flex-direction:column;gap:6px;min-width:130px}
+    .bk-field label{font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.03em}
+    .bk-field input[type=date],.bk-field input[type=number]{border:1px solid #ddd;border-radius:10px;padding:10px 12px;font-size:15px;font-family:inherit;width:100%}
+    .bk-opts{display:flex;flex-wrap:wrap;gap:10px;min-width:220px}
+    .bk-opts label{display:flex;align-items:center;gap:6px;font-size:13px;color:#333;font-weight:normal}
+    .bk-search-btn{background:#F52757;color:#fff;border:none;border-radius:15px;padding:13px 28px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
+    .bk-search-btn:hover{opacity:.9}
+    .bk-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+    .bk-card{border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.08);display:flex;flex-direction:column}
+    .bk-card img{width:100%;height:170px;object-fit:cover;display:block;background:#eee}
+    .bk-card-body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+    .bk-card-title{font-size:18px;font-weight:600;margin:0}
+    .bk-card-sub{color:#888;font-size:13px}
+    .bk-card-price{font-size:20px;font-weight:700;color:#F52757;margin-top:auto}
+    .bk-card-btn{margin-top:8px;background:#111;color:#fff;border:none;border-radius:15px;padding:11px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+    .bk-card-btn:hover{opacity:.85}
+    @media(max-width:640px){.bk-search{flex-direction:column;align-items:stretch}.bk-search-btn{width:100%}}
+  </style>
+
+  <form class="bk-search" id="bk-search-form">
+    <div class="bk-field">
+      <label>Заезд</label>
+      <input type="date" name="checkin" id="bk-checkin">
+    </div>
+    <div class="bk-field">
+      <label>Выезд</label>
+      <input type="date" name="checkout" id="bk-checkout">
+    </div>
+    <div class="bk-field">
+      <label>Гости</label>
+      <input type="number" name="guests" id="bk-guests" min="1" max="10" value="2">
+    </div>
+    <div class="bk-field">
+      <label>Дети</label>
+      <input type="number" name="kids" id="bk-kids" min="0" max="6" value="0">
+    </div>
+    <div class="bk-opts">
+      <label><input type="checkbox" value="separate_beds"> Раздельные кровати</label>
+      <label><input type="checkbox" value="kitchen"> Кухня</label>
+      <label><input type="checkbox" value="balcony"> Балкон</label>
+    </div>
+    <button type="submit" class="bk-search-btn">Показать номера</button>
+  </form>
+
+  <div class="bk-cards" id="bk-cards">Загрузка…</div>
+</div>
+
+<script>
+(function(){
+  var API = 'https://bakinka-rooms.vercel.app';
+  var RESULTS_URL = '/rooms-search';
+  var LABELS = {single:'Одноместные',double:'Двухместные',triple:'Трёхместные',bungalow:'Бунгало',apartment:'Апартаменты'};
+
+  function currentParams(extra){
+    var p = new URLSearchParams();
+    var checkin = document.getElementById('bk-checkin').value;
+    var checkout = document.getElementById('bk-checkout').value;
+    var guests = document.getElementById('bk-guests').value;
+    var kids = document.getElementById('bk-kids').value;
+    var opts = Array.prototype.slice.call(document.querySelectorAll('#bk-search-form input[type=checkbox]:checked')).map(function(c){return c.value});
+    if (checkin) p.set('checkin', checkin);
+    if (checkout) p.set('checkout', checkout);
+    if (guests) p.set('guests', guests);
+    if (kids) p.set('kids', kids);
+    if (opts.length) p.set('options', opts.join(','));
+    if (extra) Object.keys(extra).forEach(function(k){ p.set(k, extra[k]); });
+    return p;
+  }
+
+  document.getElementById('bk-search-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    window.location.href = RESULTS_URL + '?' + currentParams().toString();
+  });
+
+  fetch(API + '/api/categories').then(function(r){return r.json()}).then(function(data){
+    var el = document.getElementById('bk-cards');
+    el.innerHTML = '';
+    data.categories.forEach(function(c){
+      var card = document.createElement('div');
+      card.className = 'bk-card';
+      card.innerHTML =
+        '<img src="' + c.image + '" alt="' + (LABELS[c.category]||c.category) + '">' +
+        '<div class="bk-card-body">' +
+          '<div class="bk-card-title">' + (LABELS[c.category]||c.category) + '</div>' +
+          '<div class="bk-card-sub">' + c.count + ' вариант(а/ов)</div>' +
+          '<div class="bk-card-price">от ' + c.minPrice.toLocaleString('ru-RU') + ' р.</div>' +
+          '<button class="bk-card-btn">Посмотреть номера</button>' +
+        '</div>';
+      card.querySelector('.bk-card-btn').addEventListener('click', function(){
+        window.location.href = RESULTS_URL + '?' + currentParams({category: c.category}).toString();
+      });
+      el.appendChild(card);
+    });
+  }).catch(function(err){
+    document.getElementById('bk-cards').textContent = 'Не удалось загрузить категории номеров.';
+  });
+})();
+</script>
