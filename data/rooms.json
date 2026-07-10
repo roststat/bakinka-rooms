@@ -7,7 +7,7 @@
     "capacity": 1,
     "maxKids": 0,
     "options": [],
-    "image": "https://placehold.co/600x400?text=Odnomestny+1",
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3EOdnomestny%201%3C/text%3E%3C/svg%3E",
     "descr": "Компактный номер для одного гостя."
   },
   {
@@ -17,8 +17,10 @@
     "price": 4500,
     "capacity": 1,
     "maxKids": 0,
-    "options": ["balcony"],
-    "image": "https://placehold.co/600x400?text=Odnomestny+2",
+    "options": [
+      "balcony"
+    ],
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3EOdnomestny%202%3C/text%3E%3C/svg%3E",
     "descr": "Одноместный номер с балконом."
   },
   {
@@ -29,7 +31,7 @@
     "capacity": 1,
     "maxKids": 0,
     "options": [],
-    "image": "https://placehold.co/600x400?text=Odnomestny+3",
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3EOdnomestny%203%3C/text%3E%3C/svg%3E",
     "descr": "Бюджетный одноместный номер."
   },
   {
@@ -39,7 +41,9 @@
     "price": 7000,
     "capacity": 2,
     "maxKids": 1,
-    "options": ["separate_beds"],
+    "options": [
+      "separate_beds"
+    ],
     "image": "https://static.tildacdn.com/tild6265-6665-4966-b933-333133613834/___6.png",
     "descr": "2х-спальный диван, возможность добавить детское место."
   },
@@ -50,8 +54,11 @@
     "price": 7500,
     "capacity": 2,
     "maxKids": 1,
-    "options": ["separate_beds", "balcony"],
-    "image": "https://placehold.co/600x400?text=Dvuhmestny+2",
+    "options": [
+      "separate_beds",
+      "balcony"
+    ],
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3EDvuhmestny%202%3C/text%3E%3C/svg%3E",
     "descr": "Две раздельные кровати, балкон с видом на территорию."
   },
   {
@@ -62,7 +69,7 @@
     "capacity": 2,
     "maxKids": 0,
     "options": [],
-    "image": "https://placehold.co/600x400?text=Dvuhmestny+3",
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3EDvuhmestny%203%3C/text%3E%3C/svg%3E",
     "descr": "Стандартный двухместный номер."
   },
   {
@@ -72,8 +79,10 @@
     "price": 8200,
     "capacity": 2,
     "maxKids": 1,
-    "options": ["separate_beds"],
-    "image": "https://placehold.co/600x400?text=Dvuhmestny+4",
+    "options": [
+      "separate_beds"
+    ],
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3EDvuhmestny%204%3C/text%3E%3C/svg%3E",
     "descr": "Просторный номер повышенной комфортности."
   },
   {
@@ -83,8 +92,10 @@
     "price": 9500,
     "capacity": 3,
     "maxKids": 1,
-    "options": ["separate_beds"],
-    "image": "https://placehold.co/600x400?text=Tryohmestny+1",
+    "options": [
+      "separate_beds"
+    ],
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3ETryohmestny%201%3C/text%3E%3C/svg%3E",
     "descr": "Номер для семьи из трёх человек, есть раздельные кровати."
   },
   {
@@ -94,8 +105,11 @@
     "price": 10200,
     "capacity": 3,
     "maxKids": 2,
-    "options": ["separate_beds", "balcony"],
-    "image": "https://placehold.co/600x400?text=Tryohmestny+2",
+    "options": [
+      "separate_beds",
+      "balcony"
+    ],
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3ETryohmestny%202%3C/text%3E%3C/svg%3E",
     "descr": "Большой номер с балконом, подходит для семьи с детьми."
   },
   {
@@ -106,7 +120,7 @@
     "capacity": 3,
     "maxKids": 1,
     "options": [],
-    "image": "https://placehold.co/600x400?text=Tryohmestny+3",
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3ETryohmestny%203%3C/text%3E%3C/svg%3E",
     "descr": "Классический трёхместный номер."
   },
   {
@@ -116,8 +130,11 @@
     "price": 12000,
     "capacity": 4,
     "maxKids": 2,
-    "options": ["separate_beds", "kitchen"],
-    "image": "https://placehold.co/600x400?text=Bungalo+1",
+    "options": [
+      "separate_beds",
+      "kitchen"
+    ],
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3EBungalo%201%3C/text%3E%3C/svg%3E",
     "descr": "Отдельно стоящее бунгало с зоной барбекю рядом."
   },
   {
@@ -127,8 +144,12 @@
     "price": 13500,
     "capacity": 4,
     "maxKids": 2,
-    "options": ["separate_beds", "kitchen", "balcony"],
-    "image": "https://placehold.co/600x400?text=Bungalo+2",
+    "options": [
+      "separate_beds",
+      "kitchen",
+      "balcony"
+    ],
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3EBungalo%202%3C/text%3E%3C/svg%3E",
     "descr": "Бунгало рядом с бассейном, своя терраса."
   },
   {
@@ -138,8 +159,10 @@
     "price": 11000,
     "capacity": 3,
     "maxKids": 1,
-    "options": ["kitchen"],
-    "image": "https://placehold.co/600x400?text=Bungalo+3",
+    "options": [
+      "kitchen"
+    ],
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3EBungalo%203%3C/text%3E%3C/svg%3E",
     "descr": "Уединённое бунгало в тихой части территории."
   },
   {
@@ -149,8 +172,12 @@
     "price": 16000,
     "capacity": 4,
     "maxKids": 2,
-    "options": ["separate_beds", "kitchen", "balcony"],
-    "image": "https://placehold.co/600x400?text=Apartamenty+1",
+    "options": [
+      "separate_beds",
+      "kitchen",
+      "balcony"
+    ],
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3EApartamenty%201%3C/text%3E%3C/svg%3E",
     "descr": "Просторные апартаменты с полноценной кухней и гостиной зоной."
   },
   {
@@ -160,8 +187,11 @@
     "price": 18000,
     "capacity": 5,
     "maxKids": 3,
-    "options": ["separate_beds", "kitchen"],
-    "image": "https://placehold.co/600x400?text=Apartamenty+2",
+    "options": [
+      "separate_beds",
+      "kitchen"
+    ],
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3EApartamenty%202%3C/text%3E%3C/svg%3E",
     "descr": "Большие апартаменты для большой семьи или компании."
   },
   {
@@ -171,8 +201,11 @@
     "price": 20000,
     "capacity": 4,
     "maxKids": 2,
-    "options": ["balcony", "kitchen"],
-    "image": "https://placehold.co/600x400?text=Apartamenty+3",
+    "options": [
+      "balcony",
+      "kitchen"
+    ],
+    "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22600%22%20height%3D%22400%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23ececec%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%22%20font-size%3D%2228%22%20fill%3D%22%23999%22%3EApartamenty%203%3C/text%3E%3C/svg%3E",
     "descr": "Апартаменты с панорамным видом на территорию комплекса."
   }
 ]
