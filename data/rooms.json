@@ -1,0 +1,178 @@
+[
+  {
+    "id": "single-1",
+    "category": "single",
+    "title": "Одноместный номер \"Скромный\"",
+    "price": 4000,
+    "capacity": 1,
+    "maxKids": 0,
+    "options": [],
+    "image": "https://placehold.co/600x400?text=Odnomestny+1",
+    "descr": "Компактный номер для одного гостя."
+  },
+  {
+    "id": "single-2",
+    "category": "single",
+    "title": "Одноместный номер \"Уютный\"",
+    "price": 4500,
+    "capacity": 1,
+    "maxKids": 0,
+    "options": ["balcony"],
+    "image": "https://placehold.co/600x400?text=Odnomestny+2",
+    "descr": "Одноместный номер с балконом."
+  },
+  {
+    "id": "single-3",
+    "category": "single",
+    "title": "Одноместный номер \"Лайт\"",
+    "price": 3800,
+    "capacity": 1,
+    "maxKids": 0,
+    "options": [],
+    "image": "https://placehold.co/600x400?text=Odnomestny+3",
+    "descr": "Бюджетный одноместный номер."
+  },
+  {
+    "id": "double-1",
+    "category": "double",
+    "title": "Двухместный номер \"Малыш\"",
+    "price": 7000,
+    "capacity": 2,
+    "maxKids": 1,
+    "options": ["separate_beds"],
+    "image": "https://static.tildacdn.com/tild6265-6665-4966-b933-333133613834/___6.png",
+    "descr": "2х-спальный диван, возможность добавить детское место."
+  },
+  {
+    "id": "double-2",
+    "category": "double",
+    "title": "Двухместный номер \"Классик\"",
+    "price": 7500,
+    "capacity": 2,
+    "maxKids": 1,
+    "options": ["separate_beds", "balcony"],
+    "image": "https://placehold.co/600x400?text=Dvuhmestny+2",
+    "descr": "Две раздельные кровати, балкон с видом на территорию."
+  },
+  {
+    "id": "double-3",
+    "category": "double",
+    "title": "Двухместный номер \"Стандарт\"",
+    "price": 6800,
+    "capacity": 2,
+    "maxKids": 0,
+    "options": [],
+    "image": "https://placehold.co/600x400?text=Dvuhmestny+3",
+    "descr": "Стандартный двухместный номер."
+  },
+  {
+    "id": "double-4",
+    "category": "double",
+    "title": "Двухместный номер \"Комфорт\"",
+    "price": 8200,
+    "capacity": 2,
+    "maxKids": 1,
+    "options": ["separate_beds"],
+    "image": "https://placehold.co/600x400?text=Dvuhmestny+4",
+    "descr": "Просторный номер повышенной комфортности."
+  },
+  {
+    "id": "triple-1",
+    "category": "triple",
+    "title": "Трёхместный номер \"Семейный\"",
+    "price": 9500,
+    "capacity": 3,
+    "maxKids": 1,
+    "options": ["separate_beds"],
+    "image": "https://placehold.co/600x400?text=Tryohmestny+1",
+    "descr": "Номер для семьи из трёх человек, есть раздельные кровати."
+  },
+  {
+    "id": "triple-2",
+    "category": "triple",
+    "title": "Трёхместный номер \"Простор\"",
+    "price": 10200,
+    "capacity": 3,
+    "maxKids": 2,
+    "options": ["separate_beds", "balcony"],
+    "image": "https://placehold.co/600x400?text=Tryohmestny+2",
+    "descr": "Большой номер с балконом, подходит для семьи с детьми."
+  },
+  {
+    "id": "triple-3",
+    "category": "triple",
+    "title": "Трёхместный номер \"Классик\"",
+    "price": 9000,
+    "capacity": 3,
+    "maxKids": 1,
+    "options": [],
+    "image": "https://placehold.co/600x400?text=Tryohmestny+3",
+    "descr": "Классический трёхместный номер."
+  },
+  {
+    "id": "bungalow-1",
+    "category": "bungalow",
+    "title": "Бунгало \"Лесное\"",
+    "price": 12000,
+    "capacity": 4,
+    "maxKids": 2,
+    "options": ["separate_beds", "kitchen"],
+    "image": "https://placehold.co/600x400?text=Bungalo+1",
+    "descr": "Отдельно стоящее бунгало с зоной барбекю рядом."
+  },
+  {
+    "id": "bungalow-2",
+    "category": "bungalow",
+    "title": "Бунгало \"У воды\"",
+    "price": 13500,
+    "capacity": 4,
+    "maxKids": 2,
+    "options": ["separate_beds", "kitchen", "balcony"],
+    "image": "https://placehold.co/600x400?text=Bungalo+2",
+    "descr": "Бунгало рядом с бассейном, своя терраса."
+  },
+  {
+    "id": "bungalow-3",
+    "category": "bungalow",
+    "title": "Бунгало \"Тихое\"",
+    "price": 11000,
+    "capacity": 3,
+    "maxKids": 1,
+    "options": ["kitchen"],
+    "image": "https://placehold.co/600x400?text=Bungalo+3",
+    "descr": "Уединённое бунгало в тихой части территории."
+  },
+  {
+    "id": "apartment-1",
+    "category": "apartment",
+    "title": "Апартаменты \"Люкс\"",
+    "price": 16000,
+    "capacity": 4,
+    "maxKids": 2,
+    "options": ["separate_beds", "kitchen", "balcony"],
+    "image": "https://placehold.co/600x400?text=Apartamenty+1",
+    "descr": "Просторные апартаменты с полноценной кухней и гостиной зоной."
+  },
+  {
+    "id": "apartment-2",
+    "category": "apartment",
+    "title": "Апартаменты \"Семейные\"",
+    "price": 18000,
+    "capacity": 5,
+    "maxKids": 3,
+    "options": ["separate_beds", "kitchen"],
+    "image": "https://placehold.co/600x400?text=Apartamenty+2",
+    "descr": "Большие апартаменты для большой семьи или компании."
+  },
+  {
+    "id": "apartment-3",
+    "category": "apartment",
+    "title": "Апартаменты \"Панорама\"",
+    "price": 20000,
+    "capacity": 4,
+    "maxKids": 2,
+    "options": ["balcony", "kitchen"],
+    "image": "https://placehold.co/600x400?text=Apartamenty+3",
+    "descr": "Апартаменты с панорамным видом на территорию комплекса."
+  }
+]
